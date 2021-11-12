@@ -9,7 +9,7 @@ const authProvider = {
     
     login: ({ username, password }) =>  {
         const data = { username, password };
-        return fetch('http://42.116.186.64:8176/secured/ws/rest/v1/async/me/login', {
+        return fetch('http://27.72.147.196:36800/secured/ws/rest/v1/async/me/login', {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
@@ -17,7 +17,6 @@ const authProvider = {
             body: JSON.stringify(data)
          })
         .then(response => {
-            console.log(response.status);
             if (response.status < 200 || response.status >= 300) {
                 throw new Error(response.status);
             }   
@@ -28,7 +27,7 @@ const authProvider = {
             localStorage.setItem('authorities',data.body.roles);
         })
         .catch((err) => {
-            throw new Error('s');
+            throw new Error(err);
         });
     },
     // called when the user clicks on the logout button

@@ -1,4 +1,4 @@
-import { Edit,SimpleForm,TextInput,TextField,BooleanInput} from "ra-ui-materialui";
+import { Edit,SimpleForm,TextInput,BooleanInput} from "ra-ui-materialui";
 
 const editRole = (props) => (
     <Edit title="Role Edit" {...props}>

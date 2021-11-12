@@ -7,22 +7,21 @@ import {
   EmailField,
   ArrayField,
   EditButton,
-  BooleanField,
-  SimpleFormIterator,
+  DeleteButton,
   ChipField,
   SingleFieldList
 } from "react-admin";
 
-export default (props) => (
+const userList = (props) => (
   <List {...props}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
-      <TextField source="uuid" />
       <TextField source="fullName" />
       <TextField source="phone" />
       <TextField source="gender" />
       <EmailField source="email"  />
       <TextField source="address" />
+      
       <DateField source="birthDate"  />
       <ArrayField source="roles">
         <SingleFieldList>
@@ -30,6 +29,8 @@ export default (props) => (
         </SingleFieldList>
       </ArrayField>
       <EditButton />
+      <DeleteButton />
     </Datagrid>
   </List>
 );
+export default userList;

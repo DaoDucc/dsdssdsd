@@ -3,7 +3,6 @@ import * as React from "react";
 import { Admin, Resource } from 'react-admin';
 import userList from "./components/list/userList";
 import roleList from "./components/list/roleList";
-import UserIcon from '@material-ui/icons/Group';
 import myDataProvider from "./components/myDataProvider";
 import myAuthProvider from "./components/myAuthProvider";
 import myLoginPage from "./components/myLoginPage";

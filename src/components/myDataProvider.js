@@ -1,13 +1,12 @@
 
-var url = "http://42.116.186.64:8176/secured/ws/rest/v1/async";
+var url = 'http://27.72.147.196:36800/secured/ws/rest/v1/async';
 var basicAuth=`Basic ${localStorage.getItem('basicAuth')}`;
-console.log(basicAuth);
 const myDataProvider = {
    // READ
-   getList: (resource, params) => { 
+      getList: (resource, params) => { 
       const { page, perPage } = params.pagination;
       const rangeStart = (page - 1) * perPage;
-      const rangeEnd = page * perPage - 1;
+      const rangeEnd = page * perPage ;
       return fetch(`${url}/${resource}?limit=${rangeEnd}&offset=${rangeStart}&orderBy=id`, {
          method: 'GET',
          headers: {
@@ -17,7 +16,7 @@ const myDataProvider = {
       })
          .then(response => response.json())
          .then(data => {
-            console.log(data.body);
+            console.log(data);
             return {
                data: data.body,
                total:data.header.totalRecords
@@ -43,6 +42,23 @@ const myDataProvider = {
          };
       });
    }, 
+   // GET MANY
+   getMany: (resource,params) => {
+      return fetch(`${url}/${resource}`,{
+         method:'GET',
+         headers: {
+            'Content-Type': 'application/json',
+            'Authorization': basicAuth
+         },
+      })
+      .then(response =>response.json())
+      .then(data => {
+         console.log(data);
+         return {
+            data: data.body
+         };
+      });
+   },
    // CREATE
    create: (resource, params) => {
   
@@ -52,10 +68,10 @@ const myDataProvider = {
           "Content-Type": "application/json",
           'Authorization': basicAuth
         },
-        body: JSON.stringify(params.data),
+        body: JSON.stringify(params.data)
       })
         .then((response) => response.json())
-        .then((data) => {
+        .then(data => {
           console.log(data);
           return {
             data: data.body,
@@ -63,7 +79,40 @@ const myDataProvider = {
         });
    },
    // PUT
-   
+   update: (resource, params) => {
+      return fetch(`${url}/${resource}` ,{
+      method: "PUT",
+         headers: {
+          "Content-Type": "application/json",
+          'Authorization': basicAuth
+         },
+         body: JSON.stringify(params.data)
+      })
+        .then(response => response.json())
+        .then((data) => {
+          console.log(data);
+          return {
+            data: data.body,
+          };
+        });
+   },
+   // DELETE
+   delete: (resource, params) => {
+      return fetch(`${url}/${resource}/${params.id}` ,{
+      method: "DELETE",
+         headers: {
+          "Content-Type": "application/json",
+          'Authorization': basicAuth
+         },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+         return {
+            data: data.body
+         };
+        });
+      }
 };
 export default myDataProvider;
 

@@ -4,12 +4,12 @@ import {
   BooleanField,
   List,
   Datagrid,
-  ArrayField,
-  EditButton
+  EditButton,
+  DeleteButton,
 } from "react-admin";
 
 
-export default  (props) => (
+const roleList = (props) => (
   <List {...props}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
@@ -18,6 +18,8 @@ export default  (props) => (
       <TextField source="description" />
       <BooleanField source="default" />
       <EditButton/>
+      <DeleteButton />
     </Datagrid>
   </List>
 );
+export default roleList;
